@@ -38,18 +38,18 @@
 		</tr>
 		<?php 
 		include "koneksi.php";
-		$query_mysql = mysqli_query($host,"SELECT * FROM user");
-		while($data = mysqli_fetch_array($query_mysql)){
-		?>
-		<tr>
-			<td><?php echo $data['id']; ?></td>
-			<td><?php echo $data['nama']; ?></td>
-			<td><?php echo $data['alamat']; ?></td>
-			<td><?php echo $data['pekerjaan']; ?></td>
-			<td>
-				<a class="edit" href="edit.php?id=<?php echo $data['id']; ?>">Edit</a> |
-				<a class="hapus" href="hapus.php?id=<?php echo $data['id']; ?>">Hapus</a>					
-			</td>
+		$db = new database();
+		foreach($db->tampil_data() as $x){?>
+			<tr>
+				<td><?php echo $x['id']; ?></td>
+				<td><?php echo $x['nama']; ?></td>
+				<td><?php echo $x['alamat']; ?></td>
+				<td><?php echo $x['pekerjaan']; ?></td>
+				<td>
+					<a href="edit.php?id=<?php echo $x['id']; ?>&aksi=edit">Edit</a>
+					<a href="proses.php?id=<?php echo $x['id']; ?>&aksi=hapus">Hapus</a>			
+				</td>
+			</tr>>
 		</tr>
 		<?php } ?>
 	</table>

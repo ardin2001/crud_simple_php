@@ -22,7 +22,6 @@
 	include "koneksi.php";
 	$id = $_GET['id'];
 	$query_mysql = mysqli_query($host,"SELECT * FROM user WHERE id='$id'");
-	$nomor = 1;
 	while($data = mysqli_fetch_array($query_mysql)){
 	?>
 	<form action="update.php" method="post">		
