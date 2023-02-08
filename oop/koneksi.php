@@ -5,25 +5,23 @@ class database{
 	var $uname = "root";
 	var $pass = "";
 	var $db = "marketplace";
- 
+	var $koneksi = "";
+
+	function __construct(){
+		$this->koneksi = mysqli_connect($this->host, $this->uname, $this->pass,$this->db);
+	}
     function tampil_data(){
-        $host = mysqli_connect($this->host, $this->uname, $this->pass);     
-		mysqli_select_db($host, $this->db);
-		$data = mysqli_query($host, "select * from user");
+		$data = mysqli_query($this->koneksi, "select * from user");
 		while($d = mysqli_fetch_array($data)){
 			$hasil[] = $d;
 		}
 		return $hasil;
 	}
     function input($nama,$alamat,$usia){
-        $host = mysqli_connect($this->host, $this->uname, $this->pass);     
-		mysqli_select_db($host, $this->db);
-		mysqli_query($host, "insert into user values('','$nama','$alamat','$usia')");
+		mysqli_query($this->koneksi, "insert into user values('','$nama','$alamat','$usia')");
 	}
     function hapus($id){
-        $host = mysqli_connect($this->host, $this->uname, $this->pass);     
-		mysqli_select_db($host, $this->db);
-		mysqli_query($host, "delete from user where id='$id'");
+		mysqli_query($this->koneksi, "delete from user where id='$id'");
 	}
  
 } 
